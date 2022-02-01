@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import '../styles/LoginRegister.css';
 
 function Register() {
@@ -32,34 +32,41 @@ function Register() {
 }
 
   return (
-    <div>
-        {loading ? (<div className='test'></div>) : ""}
-      <h2>Register</h2>
-      <form onSubmit={registerUser}>
-        <input 
-          type="text" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)}
-          placeholder="name" 
-        />
-        <br/>
-        <input 
-          type="email"
-          placeholder="email" 
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
-        />
-        <br/>
-        <input 
-          type="password" 
-          placeholder="password" 
-          value={pass}
-          onChange={(e) => setpass(e.target.value)}
-        />
-        <br/>
-        <input type="submit" value="Submit" />
+    <div className='login-bg'>
+      <div className='login-container'>
+        <h1>SIGN UP</h1>
+        <form className='login-form' onSubmit={registerUser}>
+            <div>
+                <input 
+                  type="text" 
+                  value={name} 
+                  onChange={(e) => setName(e.target.value)}
+                  required={true}
+                />
+                <label htmlFor="">Name</label>
+            </div>
+            <div>
+                <input 
+                  type="text" 
+                  value={email} 
+                  onChange={(e) => setemail(e.target.value)}
+                  required={true}
+                />
+                <label htmlFor="">Email Id</label>
+            </div>
+            <div>
+                <input 
+                  type="password" 
+                  value={pass}
+                  onChange={(e) => setpass(e.target.value)}
+                  required={true}
+                />
+                <label htmlFor="">Password</label>
+            </div>
+            <input type="submit" value="Submit" />
 
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
