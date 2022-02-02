@@ -37,7 +37,9 @@ function Login() {
         const data = await response.json();
         if (data.user) {
             localStorage.setItem('token', data.user);
-            window.location.href = "/";
+            setInterval(() => {
+                window.location.href = "/";
+            }, 500);
         }   else {
             alert("Please enter correct credentials");
         }
