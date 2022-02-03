@@ -1,14 +1,21 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
+import {GlobalContext} from '../context/provider';
+import SoftLoader from './SoftLoader';
 import '../styles/LoginRegister.css';
 
 function Register() {
+  // states
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [orgName, setOrgName] = useState("");
   const [acctType, setAcctType] = useState("");
   const [category, setCategory] = useState("none");
-  const [loading, setLoading] = useState(false);
+
+  // context
+  const {solid, soft} = useContext(GlobalContext);
+  const [loading, setLoading] = solid;
+  const [softLoading, setSoftLoading] = soft;
 
   const radioHandler = (e) => {
     setAcctType(e.target.value);
@@ -16,7 +23,8 @@ function Register() {
 
   async function registerUser(e) {
     e.preventDefault();
-    if (acctType === "owner" && category === "hey") {
+    setSoftLoading(true);
+    if (acctType === "owner" && category === "none") {
       alert("Please choose your account category.");
       return;
     }
@@ -75,6 +83,10 @@ function Register() {
 
   return (
     <div className='login-bg'>
+      {softLoading 
+      ? <SoftLoader />
+      : ""
+      }
       <div className='login-container register'>
         <h1>SIGN UP</h1>
         <form className='login-form' onSubmit={registerUser}>

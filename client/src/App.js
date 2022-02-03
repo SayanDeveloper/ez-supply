@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
+// context
+import { GlobalContext } from "./context/provider";
+// components
+import SolidLoader from "./components/SolidLoader";
+import SoftLoader from "./components/SoftLoader";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
 function App() {
+  // states
   const [storageValue, setStorageValue] = useState(0);
   const [accounts, setAccounts] = useState(null);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
+
+  // context fetch
+  const {solid, soft} = useContext(GlobalContext);
+  const [loading, setLoading] = solid;
+  const [softLoading, setSoftLoading] = soft;
 
   // useEffect(async () => {
   //   try {
@@ -60,11 +71,16 @@ function App() {
     return (
       <>
         <Router>
+          {loading ? 
+            <SolidLoader />
+            : softLoading ?
+            <SoftLoader />
+            : ""
+          }
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Router>
       </>

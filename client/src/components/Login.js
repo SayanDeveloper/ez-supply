@@ -1,17 +1,34 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {GlobalContext} from '../context/provider';
+import SolidLoader from './SolidLoader';
 
 function Login() {
     // states
     const [designation, setDesignation] = useState(null);
     const [email, setemail] = useState("");
     const [pass, setpass] = useState("");
+    const [localLoader, setLocalLoader] = useState(true);
 
     // Refs
     const desRef = useRef();
     const btnGrp = useRef();
 
+    // context
+    const {solid, soft} = useContext(GlobalContext);
+    const [loading, setLoading] = solid;
+    const [softLoading, setSoftLoading] = soft;
+
     // functions
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            window.location.href = "/";
+        }
+        setTimeout(() => {
+            setLocalLoader(false);
+        }, 300)
+    }, [])
+
     const appearNext = (des) => {
         
         btnGrp.current.style.opacity = "0";
@@ -23,6 +40,7 @@ function Login() {
 
     async function loginUser(e) {
         e.preventDefault();
+        setSoftLoading(true);
         const response = await fetch("http://localhost:7000/api/login", {
             method: "POST",
             headers: {
@@ -48,6 +66,9 @@ function Login() {
 
     return (
     <div className='login-bg'>
+        {localLoader ? 
+        <SolidLoader />
+        : ""}
         <div className='login-container'>
             <h1>LOGIN</h1>
             {designation ? 

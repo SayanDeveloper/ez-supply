@@ -128,8 +128,11 @@ a {
     height: 40px;
     /* padding-left: 0px !important; */
 }
-.login-form input[type="submit"]:focus {
-    outline: none;
+.login-form input[type="submit"]:focus,
+.login-form input[type="submit"]:active {
+    outline: none  !important;
+    border: none !important;
+    cursor: pointer;
 }
 
 .login-form > div > input:focus + label,
