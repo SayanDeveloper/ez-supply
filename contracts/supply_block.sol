@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.4.18;
+pragma solidity >=0.5.0 <0.9.0;
 
 contract supplyChain {
     address public contractOwner;
@@ -25,9 +25,9 @@ contract supplyChain {
     }
     
     
-     function addProduct(string  date,string  pName,string oName,string mName) public returns(uint){
+     function addProduct(string memory  date,string memory  pName,string memory oName,string memory mName) public returns(uint){
          if(msg.sender==contractOwner){
-            Data  p = product[uniqueID];
+            Data storage p = product[uniqueID];
              p.ID=uniqueID;
              uniqueID+=1;
              p.ownerName=oName;
@@ -35,7 +35,7 @@ contract supplyChain {
              p.productName=pName;
              p.manu_Name=mName;
              p.manu_Date=date;
-             uniqueIDArray.push(uniqueID) -1;
+             uniqueIDArray.push(uniqueID);
              return (uniqueID-1);
          }
          else{
@@ -44,7 +44,7 @@ contract supplyChain {
      }
 
 
-    function changeOwner(uint id,string newOwner,address newOwnerAddress) public returns(bool){
+    function changeOwner(uint id,string memory newOwner,address newOwnerAddress) public returns(bool){
         if(msg.sender==product[id].ownerAddress){
             // product[id].prevOwner.push(product[id].ownerName);
             product[id].prevOwner= string(abi.encodePacked(product[id].prevOwner," , ",product[id].ownerName));
@@ -58,7 +58,7 @@ contract supplyChain {
 
     }
 
-    function verifyProduct(uint id) public view returns(string ){
+    function verifyProduct(uint id) public view returns(string memory){
         if(id==product[id].ID){
             return product[id].prevOwner;
         }
