@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import {GlobalContext} from "../context/provider";
+import TopNav from  './TopNav';
 
 function Dashboard() {
   // context
@@ -22,10 +23,9 @@ function Dashboard() {
     return;
   }
   return (
-    <div>
-      Hey there 
-      <button onClick={logout}>Logout</button>
-    </div>
+    <>
+      <TopNav />
+    </>
   );
 }
 

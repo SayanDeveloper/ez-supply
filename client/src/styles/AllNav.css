@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+
+.topnav-container {
+    width: calc(100% - 90px);
+    height: 70px;
+    background: linear-gradient(90deg, #00E0FF 0%, #0070FF 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 40px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.692);
+}
+.topnav-container .logo {
+    font-family: 'Supermercado One', cursive;
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.459);
+}
+.topnav-container .wallet-details {
+    font-size: 15px;
+    line-height: 20px;
+}
