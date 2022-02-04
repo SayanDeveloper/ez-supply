@@ -10,10 +10,13 @@ body, html {
   padding: 0px;
   min-height: 100vh;
   width: 100%;
+  position: relative;
 }
 #root {
   min-height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0px;
 }
 
 code {
@@ -22,4 +25,9 @@ code {
 }
 .text-center {
   text-align: center;
+}
+.overflow-dotted {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

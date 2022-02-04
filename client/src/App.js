@@ -7,8 +7,8 @@ import { GlobalContext } from "./context/provider";
 // components
 import SolidLoader from "./components/SolidLoader";
 import SoftLoader from "./components/SoftLoader";
-import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
+import TransferOwnership from './components/TransferOwnership';
 import Login from "./components/Login";
 import Register from "./components/Register";
 
@@ -81,6 +81,7 @@ function App() {
             <Route exact path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/ChangeOwnership" element={<TransferOwnership />} />
           </Routes>
         </Router>
       </>

@@ -11,6 +11,9 @@
     padding-left: 50px;
     padding-right: 40px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.692);
+    position: fixed;
+    top: 0px;
+    left: 0px;
 }
 .topnav-container .logo {
     font-family: 'Supermercado One', cursive;
@@ -21,4 +24,35 @@
 .topnav-container .wallet-details {
     font-size: 15px;
     line-height: 20px;
+}
+
+/* Sidenav */
+.sidenav {
+    width: 270px;
+    height: calc(100vh - 70px);
+    position: fixed;
+    top: 70px;
+    background-color: #003E8D;
+    padding-top: 30px;
+}
+.sidenav .each-el {
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 17px;
+    background-color: rgba(0, 0, 0, 0.17);
+    margin-bottom: 10px;
+    transition: all 0.3s ease-out;
+}
+.sidenav .each-el:hover {
+    background-color: rgba(0, 0, 0, 0.37);
+    cursor: pointer;
+}
+.sidenav .each-el i {
+    margin-right: 10px;
+}
+.sidenav .each-el.active {
+    background-color: rgba(0, 0, 0, 0.45);
 }

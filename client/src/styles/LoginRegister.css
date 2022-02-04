@@ -190,7 +190,7 @@ a {
     height: 40px;
     padding-left: 10px;
     border-radius: 5px;
-    background-color: #e3f5ff;
+    background: linear-gradient(0deg, rgb(221, 221, 221) 0%, rgba(255,255,255,1) 100%);
     font-size: 16px;
     border: 1px solid rgb(170, 170, 170);
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.192);

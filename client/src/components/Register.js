@@ -139,7 +139,7 @@ function Register() {
               </div>
             </div>
             {
-              acctType == "manufacturer" ?
+              acctType === "manufacturer" ?
               <div>
                   <input 
                     type="text" 
@@ -149,7 +149,7 @@ function Register() {
                   />
                   <label htmlFor="">Organisation Name</label>
               </div>
-              : acctType == "owner" ?
+              : acctType === "owner" ?
               <select id='owner-type' value={category} onChange={(e) => categoryUpdate(e)} required={true}>
                 <option value="none" disabled={true}>Choose category</option>
                 <option value="Distributor">Distributor</option>

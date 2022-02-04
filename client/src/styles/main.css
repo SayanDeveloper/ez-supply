@@ -1,0 +1,201 @@
+.main-content-container {
+    margin-top: 70px;
+    margin-left: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+}
+.main-content-container {
+    padding-top: 50px;
+}
+.main-content-container h2 {
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.20);
+}
+
+/* Product details modal */
+
+.modal-dark-bg {
+    z-index: 10 !important;
+    background-color: rgba(0, 0, 0, 0.603);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+}
+.product-details-modal {
+    position: fixed;
+    background-color: white;
+    border-radius: 10px;
+    width: 450px;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.712);
+    transform: translate(-50%, -50%);
+    z-index: 11 !important;
+    overflow-y: scroll;
+}
+.product-details-modal::-webkit-scrollbar {
+    display: none;
+}
+.product-details-modal {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.product-details-modal .close-option {
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.product-details-modal .close-option i {
+    padding: 10px;
+    cursor: pointer;
+}
+.product-details-modal h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.prod-modal-det-container {
+    padding: 15px;
+}
+.prod-modal-det-container > div {
+    line-height: 30px;
+}
+.prod-modal-det-container .qr-code {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* dashboard */
+
+.dashboard-search-container {
+    margin-top: 40px;
+    position: relative;
+    margin-bottom: 20px;
+}
+.dashboard-search-container input {
+    padding: 10px 20px;
+    padding-right: 45px;
+    font-size: 17px;
+    outline: none;
+    border-radius: 10px;
+    width: 350px;
+    border: 1px solid rgb(216, 216, 216);
+    box-shadow: 2px 2px 5px rgb(180, 180, 180);
+    transition: all 0.3s;
+}
+.dashboard-search-container input:focus {
+    border: 1px solid #61dfff;
+    box-shadow: 0px 0px 2px rgb(27, 27, 27);
+
+}
+.dashboard-search-container .search-icon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #63ACC3;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+}
+.scan-qr {
+    background-color: #ff9409;
+    height: 45px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.247);
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+.scan-qr:hover {
+    background-color: rgb(209, 87, 0);
+}
+.scan-qr i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Change ownership page */
+
+.main-content-container.owned h2 {
+    margin-bottom: 50px;
+}
+.owned-products-list .each-prod {
+    width: 800px;
+    height: 100px;
+    background: linear-gradient(90deg, #F1FFFF 0%, rgba(241, 255, 255, 0) 100%);
+    border: 1px solid #CAFFFF;
+    box-shadow: 0px 4px 4px 0px #E7E7E7;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.owned-prod-detail {
+    width: calc(100% - 170px);
+    cursor: pointer;
+}
+.owned-products-list .each-prod .transfer-btn {
+    width: 120px;
+    height: 45px;
+    background: linear-gradient(180deg, #00E0FF 0%, #0070FF 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.349);
+    color: white;
+    cursor: pointer;
+    background-position: 0 100%;
+    background-size: auto 100%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.39);
+    transition: all 0.3s !important;
+}
+.owned-products-list .each-prod .transfer-btn:hover {
+    background-size: auto 200%;
+    background-position: 100% 100%;
+    box-shadow: 0px 0px 2px black;
+}
+.owned-prod-detail .prod-name {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #002B6B;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.manu-id-row {
+    display: flex;
+    font-size: 15px;
+}
+.manu-id-row .manufacturer-name {
+    margin-right: 40px;
+    width: 250px;
+    overflow: hidden;
+}
+.manu-id-row .prod-id {
+    color: #004D15;
+}
