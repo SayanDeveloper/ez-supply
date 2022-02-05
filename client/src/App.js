@@ -9,6 +9,7 @@ import SolidLoader from "./components/SolidLoader";
 import SoftLoader from "./components/SoftLoader";
 import Dashboard from "./components/Dashboard";
 import TransferOwnership from './components/TransferOwnership';
+import AddProduct from "./components/AddProduct";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
@@ -20,11 +21,22 @@ function App() {
   const [contract, setContract] = useState(null);
 
   // context fetch
-  const {solid, soft} = useContext(GlobalContext);
+  const {solid, soft, desig, toast} = useContext(GlobalContext);
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
+  const [designation, setDesignation] = desig;
+  const [toastAppear, setToastAppear] = toast;
 
-  // useEffect(async () => {
+  useEffect(async () => {
+    if (localStorage.getItem("token")) {
+      const req = await fetch("http://localhost:7000/api/info", {
+        headers: {
+          'x-access-token': localStorage.getItem("token"),
+        }
+      })
+      const data = await req.json();
+      setDesignation(data.user.type);
+    }
   //   try {
   //       // Get network provider and web3 instance.
   //       const web3In = await getWeb3();
@@ -52,7 +64,7 @@ function App() {
   //       );
   //       console.error(error);
   //     }
-  // }, []);
+  }, []);
 
   // useEffect(async () => {
 
@@ -65,6 +77,12 @@ function App() {
 
   // }, [contract])
   
+    useEffect(() => {
+      setTimeout(() => {
+        setToastAppear(false);
+      }, 2000);
+    }, [toastAppear]);
+
     // if (!web3) {
     //   return <div>Loading Web3, accounts, and contract...</div>;
     // }
@@ -82,6 +100,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/ChangeOwnership" element={<TransferOwnership />} />
+            <Route path="/AddProduct" element={<AddProduct />} />
           </Routes>
         </Router>
       </>

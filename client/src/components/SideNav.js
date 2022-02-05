@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { GlobalContext } from '../context/provider';
 
 function SideNav() {
+
+  const {desig} = useContext(GlobalContext);
+  const [designation, setDesignation] = desig;
   
   const logout = () => {
     localStorage.removeItem("token");
@@ -13,6 +17,12 @@ function SideNav() {
       <NavLink to="/" className='each-el'>
         Check Product details
       </NavLink>
+      {designation==="manufacturer" ?
+        <NavLink to="/AddProduct" className='each-el'>
+          Add Product
+        </NavLink>
+        : ""
+      }
       <NavLink to="/ChangeOwnership" className='each-el'>
         Change Ownership
       </NavLink>

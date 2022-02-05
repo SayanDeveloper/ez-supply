@@ -31,7 +31,7 @@ function Dashboard() {
       <TopNav />
       <SideNav />
       <div className='main-content-container dashboard'>
-        <h2>Track a product</h2>
+        <h2>Verify a product</h2>
         <div className='dashboard-search-container'>
           <input
             type="text"
