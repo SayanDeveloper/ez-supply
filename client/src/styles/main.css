@@ -229,13 +229,52 @@ a {
 .manu-id-row .prod-id {
     color: #004D15;
 }
+.recipient-input {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.recipient-input h4 {
+    margin-bottom: 10px;
+}
+.recipient-input input {
+    padding: 7px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: #b3b3b340;
+    width: 300px;
+    border-bottom: 2px solid #00858D;
+    transition: all 0.2s;
+}
+.recipient-input input:focus {
+    border-bottom: 2px solid #00e1ec;
+}
+.recipient-input button {
+    background-color: #ff9409;
+    border-radius: 10px;
+    width: 140px;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.247);
+    margin-top: 20px;
+    cursor: pointer;
+}
+.recipient-input button:hover {
+    background-color: rgb(209, 87, 0);
+}
 
 /* Add product page */
 
 .add-prod-inputs input {
     border: none !important;
     background: #F2F2F2 !important;
-    width: 350px !important;
+    width: 400px !important;
     border-radius: 0px !important;
     border-bottom: 2px solid #00858D !important;
     transition: all 0.2s;

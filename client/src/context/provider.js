@@ -9,6 +9,7 @@ export const GlobalProvider = ({children}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [designation, setDesignation] = useState("");
     const [toastAppear, setToastAppear] = useState(false);
+    const [transferMod, setTransferMod] = useState(false);
 
     return (
         <GlobalContext.Provider value={{
@@ -16,7 +17,8 @@ export const GlobalProvider = ({children}) => {
             soft: [softLoading, setSoftLoading],
             modal: [modalOpen, setModalOpen],
             desig: [designation, setDesignation],
-            toast: [toastAppear, setToastAppear]
+            toast: [toastAppear, setToastAppear],
+            transfer: [transferMod, setTransferMod]
         }}>
             {children}
         </GlobalContext.Provider>
