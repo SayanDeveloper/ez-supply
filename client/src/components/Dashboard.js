@@ -40,7 +40,7 @@ function Dashboard() {
 
     useEffect(async () => {
     if (contract) {
-      contract.methods.verifyProduct(productId).send({ gas: '100000', from: acct })
+      contract.methods.verifyProduct(parseInt(productId)).send({ from: acct })
       .then((res) => {
         console.log(res);
         setModalOpen(true);
@@ -65,10 +65,9 @@ function Dashboard() {
     const networkId = await web3.eth.net.getId();
     const deployedNetwork = supplyChain.networks[networkId];
     const instance = new web3.eth.Contract(
-      supplyChain.abi
-      // deployedNetwork && deployedNetwork.address
+      supplyChain.abi,
+      deployedNetwork && deployedNetwork.address
     );
-    instance.options.address = "0x0280a67b8745fee1c1875677205b72ffa4e3aeca";
     setContract(instance);
     console.log(instance);
   }
