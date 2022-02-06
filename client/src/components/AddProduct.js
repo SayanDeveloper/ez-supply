@@ -20,7 +20,6 @@ function AddProduct() {
   useEffect(() => {
     const d = new Date();
     setDate(d.toISOString().substr(0, 10));
-    console.log(typeof date);
   }, []);
 
   const addProductSubmit = (e) => {

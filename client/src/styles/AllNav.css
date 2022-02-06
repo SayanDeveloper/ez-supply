@@ -25,6 +25,9 @@
     font-size: 15px;
     line-height: 20px;
 }
+.topnav-container .wallet-details span {
+    font-size: 13px;
+}
 
 /* Sidenav */
 .sidenav {

@@ -10,6 +10,8 @@ export const GlobalProvider = ({children}) => {
     const [designation, setDesignation] = useState("");
     const [toastAppear, setToastAppear] = useState(false);
     const [transferMod, setTransferMod] = useState(false);
+    // web3 stuffs
+    const [acct, setAcct] = useState(null);
 
     return (
         <GlobalContext.Provider value={{
@@ -18,7 +20,8 @@ export const GlobalProvider = ({children}) => {
             modal: [modalOpen, setModalOpen],
             desig: [designation, setDesignation],
             toast: [toastAppear, setToastAppear],
-            transfer: [transferMod, setTransferMod]
+            transfer: [transferMod, setTransferMod],
+            web3Ac: [acct, setAcct],
         }}>
             {children}
         </GlobalContext.Provider>
