@@ -48,12 +48,15 @@ a {
     height: 80vh;
     top: 50%;
     left: 50%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.712);
     transform: translate(-50%, -50%) scale(1);
     transition: all 0.2s;
     z-index: 11 !important;
     overflow-y: scroll;
     animation: modal-animation 0.2s 1 ease-out;
+    max-height: 670px;
 }
 @keyframes modal-animation {
     0% {
@@ -68,10 +71,6 @@ a {
 .product-details-modal::-webkit-scrollbar {
     display: none;
 }
-.product-details-modal {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
 .product-details-modal .close-option {
     border: 1px solid black;
     background-color: black;
@@ -80,7 +79,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    position: absolute;
+    position: sticky;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -95,7 +94,6 @@ a {
 }
 .prod-modal-det-container {
     padding: 15px;
-    margin-top: 40px;
 }
 .prod-modal-det-container > div {
     line-height: 30px;
@@ -104,6 +102,10 @@ a {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+.prod-modal-det-container .det-title {
+    color: rgb(0, 23, 100);
+    font-weight: 600;
 }
 
 /* dashboard */
@@ -267,6 +269,15 @@ a {
 }
 .recipient-input button:hover {
     background-color: rgb(209, 87, 0);
+}
+.recipient-input select {
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 5px;
+    background: linear-gradient(0deg, rgb(221, 221, 221) 0%, rgba(255,255,255,1) 100%);
+    font-size: 16px;
+    border: 1px solid rgb(170, 170, 170);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.192);
 }
 
 /* Add product page */

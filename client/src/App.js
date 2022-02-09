@@ -21,7 +21,8 @@ function App() {
   const [contract, setContract] = useState(null);
 
   // context fetch
-  const {solid, soft, desig, toast} = useContext(GlobalContext);
+  const {solid, soft, desig, toast, UserData} = useContext(GlobalContext);
+  const [userData, setUserData] = UserData;
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
   const [designation, setDesignation] = desig;
@@ -37,47 +38,11 @@ function App() {
       })
       const data = await req.json();
       setDesignation(data.user.type);
+      setUserData(data.user);
     }
-  //   try {
-  //       // Get network provider and web3 instance.
-  //       const web3In = await getWeb3();
-  
-  //       // Use web3 to get the user's accounts.
-  //       const Accounts = await web3In.eth.getAccounts();
-  
-  //       // Get the contract instance.
-  //       const networkId = await web3In.eth.net.getId();
-  //       const deployedNetwork = SimpleStorageContract.networks[networkId];
-  //       const instance = new web3In.eth.Contract(
-  //         SimpleStorageContract.abi,
-  //         deployedNetwork && deployedNetwork.address,
-  //       );
-
-  //       setWeb3(web3In);
-  //       setAccounts(Accounts);
-  //       setContract(instance);
-  //       console.log(instance);
-        
-  //     } catch (error) {
-  //       // Catch any errors for any of the above operations.
-  //       alert(
-  //         `Failed to load web3, accounts, or contract. Check console for details.`,
-  //       );
-  //       console.error(error);
-  //     }
   }, []);
-
-  // useEffect(async () => {
-
-  //   console.log("test", contract);
-  //   if (contract) {
-  //     await contract.methods.set(5).send({ from: accounts[0] });
-  //     const response = await contract.methods.get().call();
-  //     setStorageValue(response);
-  //   }
-
-  // }, [contract])
   
+  console.log(userData.email);
     useEffect(() => {
       if (toastAppear) {
         setTimeout(() => {

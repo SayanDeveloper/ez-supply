@@ -18,7 +18,8 @@ function TransferOwnership() {
   const [allProdNames, setAllProdNames] = useState([]);
 
   // context
-  const {solid, soft, web3Ac, modal, transfer} = useContext(GlobalContext);
+  const {solid, soft, web3Ac, modal, transfer, UserData} = useContext(GlobalContext);
+  const [userData, setUserData] = UserData;
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
   const [acct, setAcct] = web3Ac;

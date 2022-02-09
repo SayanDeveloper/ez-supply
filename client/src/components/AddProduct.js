@@ -19,7 +19,8 @@ function AddProduct() {
   const [contract, setContract] = useState(null);
 
   // context
-  const {toast, solid, soft, web3Ac} = useContext(GlobalContext);
+  const {toast, solid, soft, web3Ac, UserData} = useContext(GlobalContext);
+  const [userData, setUserData] = UserData;
   const [toastAppear, setToastAppear] = toast;
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
@@ -49,8 +50,8 @@ function AddProduct() {
         date,
         prodName,
         web3.utils.asciiToHex(prodName),
-        'Sayan',
-        'Sayan',
+        `${acct} (manufacturer)`, //owner_name
+        userData.orgName, // manu_name
         parseInt(quantity)
       ).send({from: acct})
       .then(res => {

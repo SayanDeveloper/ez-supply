@@ -5,6 +5,8 @@ import Web3 from 'web3';
 function TransferModal({con}) {
     // states
     const [newOwner, setNewOwner] = useState("");
+    const [receiverDesig, setReceiverDesig] = useState("none");
+
     // context
     const {transfer, modalID, web3Ac} = useContext(GlobalContext);
     const [transferMod, setTransferMod] = transfer;
@@ -25,11 +27,15 @@ function TransferModal({con}) {
     }
 
     const transferHandling = async () => {
+        if (receiverDesig === "none") {
+            alert("Please choose receiver category");
+            return;
+        }
         try {
             if (con) {
                 con.methods.changeOwner(
                     modalId[1],
-                    "New Owner",
+                    `${newOwner} (${receiverDesig})`,
                     newOwner
                 ).send({from: acct})
                 .then(res => {
@@ -64,6 +70,13 @@ function TransferModal({con}) {
                         value={newOwner}
                         onChange={(e) => setNewOwner(e.target.value)}
                     />
+                    <h4 className='text-center'>Type of receiver : </h4>
+                    <select value={receiverDesig} onChange={(e) => setReceiverDesig(e.target.value)}  required={true}>
+                        <option value="none" disabled={true}>Please Choose a category</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="retailer">Retailer</option>
+                        <option value="customer">Customer</option>
+                    </select>
                     <button onClick={transferHandling}>Send</button>
                 </div>
             </div>

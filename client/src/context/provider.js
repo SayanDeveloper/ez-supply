@@ -4,6 +4,7 @@ export const GlobalContext = createContext({});
 
 export const GlobalProvider = ({children}) => {
 
+    const [userData, setUserData] = useState("");
     const [loading, setLoading] = useState(false);
     const [softLoading, setSoftLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -24,6 +25,7 @@ export const GlobalProvider = ({children}) => {
             transfer: [transferMod, setTransferMod],
             modalID: [modalId, setModalId],
             web3Ac: [acct, setAcct],
+            UserData: [userData, setUserData]
         }}>
             {children}
         </GlobalContext.Provider>

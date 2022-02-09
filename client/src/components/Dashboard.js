@@ -45,6 +45,7 @@ function Dashboard() {
         productId
       ).call({from: acct})
       .then(res => {
+        console.log(res);
         if (res[1] == 0) {
           alert("Please enter valid product id");
         } else {

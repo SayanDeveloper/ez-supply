@@ -125,14 +125,15 @@ contract supplyChain {
 
     // My custom function for verify product
     function verifyProduct(uint id) public view returns(
-        string memory, uint, string memory, string memory, address
+        string memory, uint, string memory, string memory, address, string memory
     ){
         return (
             product[id].productName,
             product[id].ID,
             product[id].manu_Name,
             product[id].manu_Date,
-            product[id].ownerAddress
+            product[id].ownerAddress,
+            product[id].prevOwner
         );
 
     }
