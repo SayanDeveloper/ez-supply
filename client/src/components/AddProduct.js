@@ -1,36 +1,90 @@
-import React, {useState, useEFfect, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import SideNav from './SideNav';
 import TopNav from './TopNav';
 import ToastAlert from './ToastAlert';
 import '../styles/LoginRegister.css';
 import '../styles/main.css';
 import { GlobalContext } from '../context/provider';
+import Web3 from "web3";
+import supplyChain from '../contracts/supplyChain.json';
+// testing contract
+import TestBlock from '../contracts/TestBlock.json';
 
 function AddProduct() {
   // states
   const [prodName, setProdName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [date, setDate] = useState();
+  const [web3, setWeb3] = useState(null);
+  const [contract, setContract] = useState(null);
 
   // context
-  const {toast} = useContext(GlobalContext);
+  const {toast, solid, soft, web3Ac} = useContext(GlobalContext);
   const [toastAppear, setToastAppear] = toast;
+  const [loading, setLoading] = solid;
+  const [softLoading, setSoftLoading] = soft;
+  const [acct, setAcct] = web3Ac;
 
   // functions
-  useEffect(() => {
+  useEffect(async () => {
     const d = new Date();
     setDate(d.toISOString().substr(0, 10));
+    if (window.ethereum) {
+      try {
+        let acc = await window.ethereum.send("eth_requestAccounts");
+        let web3 = new Web3(window.ethereum);
+        setWeb3(web3);
+        setLoading(false);
+      } catch(err) 
+      {
+        console.log(err.message);
+      }
+    }
+    setSoftLoading(false);
   }, []);
 
-  const addProductSubmit = (e) => {
+  useEffect(() => {
+    if (contract) {
+      contract.methods.addProduct(
+        date,
+        prodName,
+        web3.utils.asciiToHex(prodName),
+        'Sayan',
+        'Sayan',
+        parseInt(quantity)
+      ).send({from: acct})
+      .then(res => {
+        console.log(res);
+        setToastAppear(true);
+        setProdName("");
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+    }
+  }, [contract]);
+
+  const addProductSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
-    setToastAppear(true);
+    if (!prodName) {
+      alert("Please provide a product name");
+      return;
+    }
+    setSoftLoading(true);
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = supplyChain.networks[networkId];
+    const instance = new web3.eth.Contract(
+      supplyChain.abi,
+      deployedNetwork && deployedNetwork.address
+    );
+    setContract(instance);
+    console.log(instance);
+    setSoftLoading(false);
   }
 
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
+  // useEffect(() => {
+  //   console.log(date);
+  // }, [date]);
 
   return (
     <>
@@ -47,8 +101,8 @@ function AddProduct() {
           <div>
               <input 
                   type="text"
-                  // value={email}
-                  // onChange={(e) => setemail(e.target.value)}
+                  value={prodName}
+                  onChange={(e) => setProdName(e.target.value)}
                   placeholder='Enter product name'
                   required={true}
               />

@@ -1,7 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {GlobalContext} from '../context/provider';
 import SoftLoader from './SoftLoader';
 import '../styles/LoginRegister.css';
+import Web3 from "web3";
+import supplyChain from '../contracts/supplyChain.json';
 
 function Register() {
   // states
@@ -11,11 +13,79 @@ function Register() {
   const [orgName, setOrgName] = useState("");
   const [acctType, setAcctType] = useState("");
   const [category, setCategory] = useState("none");
+  const [web3, setWeb3] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [solVerified, setSolVerified] = useState(false);
+  const [acct, setAcct] = useState("");
 
   // context
   const {solid, soft} = useContext(GlobalContext);
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
+
+  // useEffect functions
+  useEffect(async () => {
+    if (window.ethereum) {
+      try {
+        let acc = await window.ethereum.send("eth_requestAccounts");
+        let web3 = new Web3(window.ethereum);
+        let acctF = await web3.eth.getAccounts();
+        setAcct(acctF);
+        setWeb3(web3);
+        setLoading(false);
+      } catch(err) 
+      {
+        console.log(err.message);
+      }
+    }
+  }, []);
+
+  useEffect(async () => {
+    // solidity signup
+    if (contract) {
+      const res = await contract.methods.addManufacturerCheck().call({from: acct[0]});
+      console.log(res);
+      if (res) {
+        setSolVerified(true);
+        const a = await contract.methods.addManufacturer().send({from: acct[0]});
+        setLoading(false);
+        window.location.href = "/login";
+      } else {
+        alert("The wallet id is linked with another manufacturer account");
+        setSoftLoading(false);
+        return;
+      }
+    }
+  }, [contract]);
+
+  useEffect(async () => {
+    if (solVerified) {
+      // mongodb signup
+      const response = await fetch("http://localhost:7000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: pass,
+          type: acctType,
+          orgName: orgName,
+          category: category
+        }),
+      })
+
+      const data = await response.json();
+      console.log(data);
+      // setTimeout(() => {
+      //     setLoading(false);
+      //     window.location.href = "/login";
+      // }, 300);
+    }
+  }, [solVerified]);
+
+  // js functions
 
   const radioHandler = (e) => {
     setAcctType(e.target.value);
@@ -23,7 +93,8 @@ function Register() {
 
   async function registerUser(e) {
     e.preventDefault();
-    setSoftLoading(true);
+
+    // validations
     if (acctType === "owner" && category === "none") {
       alert("Please choose your account category.");
       return;
@@ -48,39 +119,29 @@ function Register() {
         return;
       }
     }
-
     if (pass.length < 7) {
       alert("Password length should be at least 8 characters.");
       return;
     }
-    setLoading(true);
-    const response = await fetch("http://localhost:7000/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: pass,
-        type: acctType,
-        orgName: orgName,
-        category: category
-      }),
-    })
 
-    const data = await response.json();
-    console.log(data);
-    setTimeout(() => {
-        setLoading(false);
-        window.location.href = "/login";
-    }, 300);
+    // contract integration
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = supplyChain.networks[networkId];
+    const instance = new web3.eth.Contract(
+      supplyChain.abi,
+      deployedNetwork && deployedNetwork.address
+    );
+    setContract(instance);
+    setSoftLoading(true);
   }
 
   const categoryUpdate = (e) => {
     setCategory(e.target.value);
   }
 
+  if (!web3) {
+    return <div>Loading Web3, accounts, and contract...</div>;
+  }
   return (
     <div className='login-bg'>
       {softLoading 

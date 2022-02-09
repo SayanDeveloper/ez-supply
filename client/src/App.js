@@ -78,9 +78,11 @@ function App() {
   // }, [contract])
   
     useEffect(() => {
-      setTimeout(() => {
-        setToastAppear(false);
-      }, 2000);
+      if (toastAppear) {
+        setTimeout(() => {
+          setToastAppear(false);
+        }, 2000);
+      }
     }, [toastAppear]);
 
     // if (!web3) {

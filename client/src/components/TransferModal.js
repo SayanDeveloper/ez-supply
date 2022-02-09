@@ -3,8 +3,9 @@ import { GlobalContext } from '../context/provider';
 
 function TransferModal() {
     // context
-    const {transfer} = useContext(GlobalContext);
+    const {transfer, modalID} = useContext(GlobalContext);
     const [transferMod, setTransferMod] = transfer;
+    const [modalId, setModalId] = modalID;
     // refs
     const theModal = useRef();
     const modalBg = useRef();
@@ -25,11 +26,11 @@ function TransferModal() {
             <div className='close-option'><i onClick={animateFade} className="fa fa-times" aria-hidden="true"></i></div>
             <div className='prod-modal-det-container'>
                 <h3 className='text-center'>
-                    Product name
+                    {modalId[0]}
                 </h3>
-                <div className='prod-id'>Product ID: 12345678</div>
-                <div className='manu-name'>Manufacturer: Sample organisation</div>
-                <div className='current-owner'>Current Owner: 0x234feb234bd3 (Distributor)</div>
+                <div className='prod-id'>Product ID: {modalId[1]}</div>
+                <div className='manu-name'>Manufacturer: {modalId[2]}</div>
+                <div className='current-owner'>Current Owner: {modalId[4]}</div>
                 <div className='recipient-input'>
                     <h4 className='text-center'>Enter the wallet address of recipient</h4>
                     <input />

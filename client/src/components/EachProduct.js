@@ -2,31 +2,59 @@ import React, {useState, useContext} from 'react';
 import { GlobalContext } from '../context/provider';
 import ProductDetails from './ProductDetails';
 import TransferModal from './TransferModal';
+import Web3 from 'web3';
 
-function EachProduct() {
+function EachProduct({prodId, prodName, con}) {
     // Context
-    const {modal, transfer} = useContext(GlobalContext);
+    const {modal, transfer, web3Ac, modalID, soft} = useContext(GlobalContext);
+    const [softLoading, setSoftLoading] = soft;
     const [modalOpen, setModalOpen] = modal;
     const [transferMod, setTransferMod] = transfer;
+    const [acct, setAcct] = web3Ac;
+    const [modalId, setModalId] = modalID;
+
+    // functions
+    const showProdDetails = async () => {
+        setSoftLoading(true);
+        if (con) {
+            con.methods.verifyProduct(prodId).call({from: acct})
+            .then(res => {
+                setModalId(Object.values(res));
+                setModalOpen(true);
+                setSoftLoading(false);
+            })
+            .catch(err => {
+                setSoftLoading(false);
+                alert(err.message);
+            })
+        }
+    }
+
+    const transferModalHandling = async () => {
+        setSoftLoading(true);
+        if (con) {
+            con.methods.verifyProduct(prodId).call({from: acct})
+            .then(res => {
+                setModalId(Object.values(res));
+                setTransferMod(true);
+                setSoftLoading(false);
+            })
+            .catch(err => {
+                setSoftLoading(false);
+                alert(err.message);
+            })
+        }
+    }
 
     return (
     <div className='each-prod'>
-        {modalOpen ?
-        <ProductDetails />
-        : ""
-        }
-        {transferMod ?
-        <TransferModal />
-        : ""
-        }
-        <div className='owned-prod-detail' onClick={() => setModalOpen(true)}>
-            <div className='prod-name overflow-dotted'>Iphone 20 max pro ultra ultimate </div>
+        <div className='owned-prod-detail' onClick={showProdDetails}>
+            <div className='prod-name overflow-dotted'>{Web3.utils.toAscii(prodName)}</div>
             <div className='manu-id-row'>
-                <div className='manufacturer-name overflow-dotted'>Manufacturer: Sample organisation</div>
-                <div className='prod-id'>Product Id: 12345678</div>
+                <div className='prod-id'>Product Id: {prodId}</div>
             </div>
         </div>
-        <div className='transfer-btn' onClick={() => setTransferMod(true)}>Transfer</div>
+        <div className='transfer-btn' onClick={transferModalHandling}>Transfer</div>
     </div>
     );
 }

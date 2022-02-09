@@ -10,6 +10,7 @@ export const GlobalProvider = ({children}) => {
     const [designation, setDesignation] = useState("");
     const [toastAppear, setToastAppear] = useState(false);
     const [transferMod, setTransferMod] = useState(false);
+    const [modalId, setModalId] = useState({});
     // web3 stuffs
     const [acct, setAcct] = useState(null);
 
@@ -21,6 +22,7 @@ export const GlobalProvider = ({children}) => {
             desig: [designation, setDesignation],
             toast: [toastAppear, setToastAppear],
             transfer: [transferMod, setTransferMod],
+            modalID: [modalId, setModalId],
             web3Ac: [acct, setAcct],
         }}>
             {children}

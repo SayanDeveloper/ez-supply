@@ -13,14 +13,15 @@ function Dashboard() {
   const [accounts, setAccounts] = useState(null);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
+  const [productId, setProductId] = useState("");
 
   // context
-  const {solid, soft, modal, web3Ac} = useContext(GlobalContext);
+  const {solid, soft, modal, web3Ac, modalID} = useContext(GlobalContext);
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
   const [modalOpen, setModalOpen] = modal;
-  const [productId, setProductId] = useState("");
   const [acct, setAcct] = web3Ac;
+  const [modalId, setModalId] = modalID;
 
   // all useEffects
   useEffect(async () => {
@@ -40,14 +41,20 @@ function Dashboard() {
 
     useEffect(async () => {
     if (contract) {
-      contract.methods.verifyProduct(parseInt(productId)).send({ from: acct })
-      .then((res) => {
-        console.log(res);
-        setModalOpen(true);
+      contract.methods.verifyProduct(
+        productId
+      ).call({from: acct})
+      .then(res => {
+        if (res[1] == 0) {
+          alert("Please enter valid product id");
+        } else {
+          setModalId(Object.values(res));
+          setModalOpen(true);
+        }
         setSoftLoading(false);
       })
       .catch(err => {
-        alert(err.message);
+        console.log(err.message);
         setSoftLoading(false);
       });
     }
@@ -69,7 +76,6 @@ function Dashboard() {
       deployedNetwork && deployedNetwork.address
     );
     setContract(instance);
-    console.log(instance);
   }
   
   if (localStorage.getItem('token') == null) {
