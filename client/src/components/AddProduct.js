@@ -56,10 +56,12 @@ function AddProduct() {
       .then(res => {
         console.log(res);
         setToastAppear(true);
+        setSoftLoading(false);
         setProdName("");
       })
       .catch(err => {
-        console.log(err.message);
+        setSoftLoading(false);
+        alert(err.message);
       });
     }
   }, [contract]);
@@ -79,7 +81,6 @@ function AddProduct() {
     );
     setContract(instance);
     console.log(instance);
-    setSoftLoading(false);
   }
 
   // useEffect(() => {

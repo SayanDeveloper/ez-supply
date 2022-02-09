@@ -27,6 +27,7 @@ function App() {
   const [designation, setDesignation] = desig;
   const [toastAppear, setToastAppear] = toast;
 
+  // functions
   useEffect(async () => {
     if (localStorage.getItem("token")) {
       const req = await fetch("http://localhost:7000/api/info", {

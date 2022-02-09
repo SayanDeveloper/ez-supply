@@ -1,11 +1,15 @@
-import React, {useContext, useRef} from 'react';
+import React, {useState, useContext, useRef} from 'react';
 import { GlobalContext } from '../context/provider';
+import Web3 from 'web3';
 
-function TransferModal() {
+function TransferModal({con}) {
+    // states
+    const [newOwner, setNewOwner] = useState("");
     // context
-    const {transfer, modalID} = useContext(GlobalContext);
+    const {transfer, modalID, web3Ac} = useContext(GlobalContext);
     const [transferMod, setTransferMod] = transfer;
     const [modalId, setModalId] = modalID;
+    const [acct, setAcct] = web3Ac;
     // refs
     const theModal = useRef();
     const modalBg = useRef();
@@ -19,6 +23,28 @@ function TransferModal() {
             setTransferMod(false);
         }, 300);
     }
+
+    const transferHandling = async () => {
+        try {
+            if (con) {
+                con.methods.changeOwner(
+                    modalId[1],
+                    "New Owner",
+                    newOwner
+                ).send({from: acct})
+                .then(res => {
+                    setTransferMod(false);
+                    console.log("Successful");
+                })
+                .catch(err => {
+                    alert(err.message);
+                })
+            }
+        }   catch(err) {
+            alert("Invalid receiver id");
+        }
+    }
+
   return (
     <>
         <div className='modal-dark-bg' ref={modalBg} onClick={animateFade}></div>
@@ -33,8 +59,12 @@ function TransferModal() {
                 <div className='current-owner'>Current Owner: {modalId[4]}</div>
                 <div className='recipient-input'>
                     <h4 className='text-center'>Enter the wallet address of recipient</h4>
-                    <input />
-                    <button>Send</button>
+                    <input 
+                        type="text"
+                        value={newOwner}
+                        onChange={(e) => setNewOwner(e.target.value)}
+                    />
+                    <button onClick={transferHandling}>Send</button>
                 </div>
             </div>
         </div>

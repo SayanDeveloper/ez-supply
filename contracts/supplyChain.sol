@@ -4,23 +4,6 @@ pragma solidity >=0.5.0 <0.9.0;
 
 contract supplyChain {
 
-
-
-    // function changeOwner(uint id,string memory newOwner,address newOwnerAddress) public returns(bool){
-    //     if(msg.sender==product[id].ownerAddress){
-    //         // product[id].prevOwner.push(product[id].ownerName);
-    //         product[id].prevOwner= string(abi.encodePacked(product[id].prevOwner," , ",product[id].ownerName));
-    //         product[id].ownerAddress=newOwnerAddress;
-    //         product[id].ownerName=newOwner;
-    //         return true;
-    //     }
-    //     else{
-    //     return false;
-    //     }
-
-    // }
-
-
     address public contractOwner;
     
     // stores the current unique Id which will be assigned
@@ -115,7 +98,8 @@ contract supplyChain {
         uint i=0;
         for(i=0;i<idList[x].length;i++){
             if(idList[x][i]==Id){
-                idList[x][i]=0;
+                // idList[x][i]=0;
+                delete idList[x][i];
             }
         }
     }
@@ -152,7 +136,5 @@ contract supplyChain {
         );
 
     }
-
-
 
 }

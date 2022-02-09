@@ -5,8 +5,11 @@ import '../styles/AllNav.css';
 import { GlobalContext } from '../context/provider';
 
 function TopNav() {
+  // context
   const {web3Ac} = useContext(GlobalContext);
   const [acct, setAcct] = web3Ac;
+
+  // useEffect functions
   useEffect(async () => {
     if (window.ethereum) {
       try {
@@ -22,9 +25,10 @@ function TopNav() {
       }
     }
   }, []);
+  
   return (
     <div className='topnav-container'>
-      <h1 className='logo'>EZ Chain</h1>
+      <h1 className='logo'>EZ Supply</h1>
       <div className='wallet-details text-center'>
         Wallet Address:<br />
         <span>

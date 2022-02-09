@@ -45,7 +45,11 @@ function EachProduct({prodId, prodName, con}) {
             })
         }
     }
-
+    if (prodId == 0) {
+        return(
+            <></>
+        );
+    }
     return (
     <div className='each-prod'>
         <div className='owned-prod-detail' onClick={showProdDetails}>

@@ -38,7 +38,7 @@ function TransferOwnership() {
         console.log(err.message);
       }
     }
-    setSoftLoading(false);
+    setSoftLoading(true);
   }, []);
   
   useEffect(async () => {
@@ -92,7 +92,7 @@ function TransferOwnership() {
         : ""
         }
         {transferMod ?
-        <TransferModal id="100001" />
+        <TransferModal con={contract} id="100001" />
         : ""
       }
       <div className='main-content-container owned'>
