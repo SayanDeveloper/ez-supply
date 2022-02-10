@@ -88,6 +88,13 @@ function AddProduct() {
   //   console.log(date);
   // }, [date]);
 
+  if (localStorage.getItem('token') == null) {
+    window.location.href = "/login";
+    return;
+  }
+  if (!web3) {
+    return <div>Loading Web3, accounts, and contract...</div>;
+  }
   return (
     <>
       <TopNav />
