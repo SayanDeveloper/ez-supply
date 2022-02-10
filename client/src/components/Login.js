@@ -21,7 +21,7 @@ function Login() {
 
     // functions
     useEffect(() => {
-        if (localStorage.getItem('token')) {
+        if (sessionStorage.getItem('token')) {
             window.location.href = "/";
         }
         setTimeout(() => {
@@ -54,7 +54,7 @@ function Login() {
 
         const data = await response.json();
         if (data.user) {
-            localStorage.setItem('token', data.user);
+            sessionStorage.setItem('token', data.user);
             setInterval(() => {
                 window.location.href = "/";
             }, 500);

@@ -88,7 +88,7 @@ function AddProduct() {
   //   console.log(date);
   // }, [date]);
 
-  if (localStorage.getItem('token') == null) {
+  if (sessionStorage.getItem('token') == null) {
     window.location.href = "/login";
     return;
   }

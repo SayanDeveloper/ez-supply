@@ -30,10 +30,10 @@ function App() {
 
   // functions
   useEffect(async () => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("token")) {
       const req = await fetch("http://localhost:7000/api/info", {
         headers: {
-          'x-access-token': localStorage.getItem("token"),
+          'x-access-token': sessionStorage.getItem("token"),
         }
       })
       const data = await req.json();

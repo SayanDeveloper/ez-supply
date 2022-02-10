@@ -77,7 +77,7 @@ function TransferOwnership() {
   }, [contract]);
 
 
-  if (localStorage.getItem('token') == null) {
+  if (sessionStorage.getItem('token') == null) {
     window.location.href = "/login";
     return;
   }
