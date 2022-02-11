@@ -9,7 +9,15 @@ const bcrypt = require("bcryptjs");
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/test-signup');
+const DB = "mongodb+srv://web3project:ezsupply@ez-supply.dwlrg.mongodb.net/test-signup?retryWrites=true&w=majority";
+mongoose.connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}).then(res => {
+    console.log("DB conneected");
+}).catch(err => {
+    console.log(err.message);
+});
 
 app.post("/api/register", async (req, res) => {
     console.log(req.body);

@@ -61,7 +61,7 @@ function Register() {
   useEffect(async () => {
     if (solVerified) {
       // mongodb signup
-      const response = await fetch("http://localhost:7000/api/register", {
+      const response = await fetch("https://ezsupply-backend.herokuapp.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
