@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import getWeb3 from "./getWeb3";
 // context
 import { GlobalContext } from "./context/provider";
 // components

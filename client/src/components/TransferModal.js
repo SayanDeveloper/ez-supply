@@ -1,6 +1,5 @@
 import React, {useState, useContext, useRef} from 'react';
 import { GlobalContext } from '../context/provider';
-import Web3 from 'web3';
 
 function TransferModal({con}) {
     // states
@@ -9,8 +8,11 @@ function TransferModal({con}) {
 
     // context
     const {transfer, modalID, web3Ac} = useContext(GlobalContext);
+    // eslint-disable-next-line
     const [transferMod, setTransferMod] = transfer;
+    // eslint-disable-next-line
     const [modalId, setModalId] = modalID;
+    // eslint-disable-next-line
     const [acct, setAcct] = web3Ac;
     // refs
     const theModal = useRef();

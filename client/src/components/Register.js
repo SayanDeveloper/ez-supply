@@ -20,6 +20,7 @@ function Register() {
 
   // context
   const {solid, soft} = useContext(GlobalContext);
+  // eslint-disable-next-line
   const [loading, setLoading] = solid;
   const [softLoading, setSoftLoading] = soft;
 
@@ -27,6 +28,7 @@ function Register() {
   useEffect(async () => {
     if (window.ethereum) {
       try {
+        // eslint-disable-next-line
         let acc = await window.ethereum.send("eth_requestAccounts");
         let web3 = new Web3(window.ethereum);
         let acctF = await web3.eth.getAccounts();
@@ -46,10 +48,10 @@ function Register() {
       const res = await contract.methods.addManufacturerCheck().call({from: acct[0]});
       console.log(res);
       if (res) {
-        setSolVerified(true);
         const a = await contract.methods.addManufacturer().send({from: acct[0]});
+        setSolVerified(true);
         setLoading(false);
-        window.location.href = "/login";
+        // window.location.href = "/login";
       } else {
         alert("The wallet id is linked with another manufacturer account");
         setSoftLoading(false);
@@ -58,31 +60,31 @@ function Register() {
     }
   }, [contract]);
 
-  useEffect(async () => {
-    if (solVerified) {
-      // mongodb signup
-      const response = await fetch("https://ezsupply-backend.herokuapp.com/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          password: pass,
-          type: acctType,
-          orgName: orgName,
-          category: category
-        }),
-      })
-
-      const data = await response.json();
-      console.log(data);
-      // setTimeout(() => {
-      //     setLoading(false);
-      //     window.location.href = "/login";
-      // }, 300);
-    }
+  useEffect(() => {
+    async function signup() {
+      if (solVerified) {
+        // mongodb signup
+        const response = await fetch("https://ezsupply-backend.herokuapp.com/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: pass,
+            type: acctType,
+            orgName: orgName,
+            category: category
+          }),
+        })
+  
+        const data = await response.json();
+        console.log(data);
+        window.location.href = "/login";
+      }
+    };
+    signup();
   }, [solVerified]);
 
   // js functions

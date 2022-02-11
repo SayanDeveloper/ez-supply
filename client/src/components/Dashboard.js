@@ -4,7 +4,6 @@ import '../styles/main.css';
 import TopNav from  './TopNav';
 import SideNav from './SideNav';
 import ProductDetails from './ProductDetails';
-import getWeb3 from "../getWeb3"; 
 import Web3 from "web3";
 import supplyChain from '../contracts/supplyChain.json';
 

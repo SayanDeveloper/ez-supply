@@ -9576,13 +9576,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xBE3849D9B7177F541A5cAf0030Ce2B9e4E995bf7",
-      "transactionHash": "0x6274dfefbd559a4db5c0415a20e536ebc53e12d898aa36041c5bf5bc5bb6db4f"
+      "address": "0xb40BC667d632028AbeBfb775AfCBFb52Fec331fb",
+      "transactionHash": "0x390f81d125e76f777b3efdfc0560d74e1f1fc12c26898f1ff44f31d8a17abc07"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-10T10:07:42.014Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-02-11T13:01:49.703Z",
   "devdoc": {
     "methods": {}
   },

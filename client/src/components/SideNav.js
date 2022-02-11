@@ -5,6 +5,7 @@ import { GlobalContext } from '../context/provider';
 function SideNav() {
 
   const {desig} = useContext(GlobalContext);
+  // eslint-disable-next-line
   const [designation, setDesignation] = desig;
   
   const logout = () => {
