@@ -27,53 +27,62 @@ function TransferOwnership() {
   const [transferMod, setTransferMod] = transfer;
 
   // functions
-  useEffect(async () => {
-    if (window.ethereum) {
-      try {
-        let acc = await window.ethereum.send("eth_requestAccounts");
-        let web3 = new Web3(window.ethereum);
-        setWeb3(web3);
-        setLoading(false);
-      } catch(err) 
-      {
-        console.log(err.message);
+  useEffect(() => {
+    async function metamaskConnection() {
+      if (window.ethereum) {
+        try {
+          let acc = await window.ethereum.send("eth_requestAccounts");
+          let web3 = new Web3(window.ethereum);
+          setWeb3(web3);
+          setLoading(false);
+        } catch(err) 
+        {
+          console.log(err.message);
+        }
       }
-    }
-    setSoftLoading(true);
+      setSoftLoading(true);
+    };
+    metamaskConnection();
   }, []);
   
-  useEffect(async () => {
-    if (web3) {
-      setSoftLoading(true);
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = supplyChain.networks[networkId];
-      const instance = new web3.eth.Contract(
-        supplyChain.abi,
-        deployedNetwork && deployedNetwork.address
-      );
-      setContract(instance);
-    }
+  useEffect(() => {
+    async function contractSetup() {
+      if (web3) {
+        setSoftLoading(true);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = supplyChain.networks[networkId];
+        const instance = new web3.eth.Contract(
+          supplyChain.abi,
+          deployedNetwork && deployedNetwork.address
+        );
+        setContract(instance);
+      }
+    };
+    contractSetup();
   }, [web3]);
 
-  useEffect(async () => {
-    if (contract) {
-      contract.methods.ownerProducts().call({from: acct})
-      .then(res => {
-        setAllProdNames(res);
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-
-      contract.methods.ownerProductsId().call({from: acct})
-      .then(res => {
-        setAllIds(res);
-      })
-      .catch(err => {
-        console.log(err.message);
-      })
-      setSoftLoading(false);
-    }
+  useEffect(() => {
+    async function contractCalls() {
+      if (contract) {
+        contract.methods.ownerProducts().call({from: acct})
+        .then(res => {
+          setAllProdNames(res);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+  
+        contract.methods.ownerProductsId().call({from: acct})
+        .then(res => {
+          setAllIds(res);
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
+        setSoftLoading(false);
+      }
+    };
+    contractCalls();
   }, [contract]);
 
 
@@ -98,9 +107,6 @@ function TransferOwnership() {
       }
       <div className='main-content-container owned'>
         <h2>Owned Products</h2>
-        {/* <div className='owned-search'>
-          Search Product(by name):
-        </div> */}
         <div className='owned-products-list'>
           {allIds.map((item, index) => {
             return(

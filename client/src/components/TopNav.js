@@ -10,20 +10,23 @@ function TopNav() {
   const [acct, setAcct] = web3Ac;
 
   // useEffect functions
-  useEffect(async () => {
-    if (window.ethereum) {
-      try {
-        let acc = await window.ethereum.send("eth_requestAccounts");
-        let web3 = new Web3(window.ethereum);
-        if (!acct) {
-          const accounts = await web3.eth.getAccounts();
-          setAcct(accounts[0]);
+  useEffect(() => {
+    async function metamaskConnection() {
+      if (window.ethereum) {
+        try {
+          let acc = await window.ethereum.send("eth_requestAccounts");
+          let web3 = new Web3(window.ethereum);
+          if (!acct) {
+            const accounts = await web3.eth.getAccounts();
+            setAcct(accounts[0]);
+          }
+        } catch(err) 
+        {
+          console.log(err.message);
         }
-      } catch(err) 
-      {
-        console.log(err.message);
       }
     }
+    metamaskConnection();
   }, []);
   
   return (

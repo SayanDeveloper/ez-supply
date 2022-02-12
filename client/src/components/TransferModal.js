@@ -53,7 +53,7 @@ function TransferModal({con}) {
         }
     }
 
-  return (
+    return (
     <>
         <div className='modal-dark-bg' ref={modalBg} onClick={animateFade}></div>
         <div className='product-details-modal' ref={theModal}>

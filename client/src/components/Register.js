@@ -25,39 +25,45 @@ function Register() {
   const [softLoading, setSoftLoading] = soft;
 
   // useEffect functions
-  useEffect(async () => {
-    if (window.ethereum) {
-      try {
-        // eslint-disable-next-line
-        let acc = await window.ethereum.send("eth_requestAccounts");
-        let web3 = new Web3(window.ethereum);
-        let acctF = await web3.eth.getAccounts();
-        setAcct(acctF);
-        setWeb3(web3);
-        setLoading(false);
-      } catch(err) 
-      {
-        console.log(err.message);
+  useEffect(() => {
+    async function metamaskConnection() {
+      if (window.ethereum) {
+        try {
+          // eslint-disable-next-line
+          let acc = await window.ethereum.send("eth_requestAccounts");
+          let web3 = new Web3(window.ethereum);
+          let acctF = await web3.eth.getAccounts();
+          setAcct(acctF);
+          setWeb3(web3);
+          setLoading(false);
+        } catch(err) 
+        {
+          console.log(err.message);
+        }
       }
     }
+    metamaskConnection();
   }, []);
 
-  useEffect(async () => {
-    // solidity signup
-    if (contract) {
-      const res = await contract.methods.addManufacturerCheck().call({from: acct[0]});
-      console.log(res);
-      if (res) {
-        const a = await contract.methods.addManufacturer().send({from: acct[0]});
-        setSolVerified(true);
-        setLoading(false);
-        // window.location.href = "/login";
-      } else {
-        alert("The wallet id is linked with another manufacturer account");
-        setSoftLoading(false);
-        return;
+  useEffect(() => {
+    async function contractCalls() {
+      // solidity signup
+      if (contract) {
+        const res = await contract.methods.addManufacturerCheck().call({from: acct[0]});
+        console.log(res);
+        if (res) {
+          const a = await contract.methods.addManufacturer().send({from: acct[0]});
+          setSolVerified(true);
+          setLoading(false);
+          // window.location.href = "/login";
+        } else {
+          alert("The wallet id is linked with another manufacturer account");
+          setSoftLoading(false);
+          return;
+        }
       }
     }
+    contractCalls();
   }, [contract]);
 
   useEffect(() => {

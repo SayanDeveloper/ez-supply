@@ -60,6 +60,7 @@ function Login() {
             }, 500);
         }   else {
             alert("Please enter correct credentials");
+            setSoftLoading(false);
         }
         console.log(data);
     }
