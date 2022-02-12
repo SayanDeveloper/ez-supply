@@ -9,7 +9,6 @@ import supplyChain from '../contracts/supplyChain.json';
 
 function Dashboard() {
   // states
-  const [accounts, setAccounts] = useState(null);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [productId, setProductId] = useState("");
@@ -23,41 +22,47 @@ function Dashboard() {
   const [modalId, setModalId] = modalID;
 
   // all useEffects
-  useEffect(async () => {
-    if (window.ethereum) {
-      try {
-        let acc = await window.ethereum.send("eth_requestAccounts");
-        let web3 = new Web3(window.ethereum);
-        setWeb3(web3);
-        setLoading(false);
-      } catch(err) 
-      {
-        console.log(err.message);
+  useEffect(() => {
+    async function metamaskConnection() {
+      if (window.ethereum) {
+        try {
+          let acc = await window.ethereum.send("eth_requestAccounts");
+          let web3 = new Web3(window.ethereum);
+          setWeb3(web3);
+          setLoading(false);
+        } catch(err) 
+        {
+          console.log(err.message);
+        }
       }
-    }
-    setSoftLoading(false);
+      setSoftLoading(false);
+    };
+    metamaskConnection();
   }, []);
 
-    useEffect(async () => {
-    if (contract) {
-      contract.methods.verifyProduct(
-        productId
-      ).call({from: acct})
-      .then(res => {
-        console.log(res);
-        if (res[1] == 0) {
-          alert("Please enter valid product id");
-        } else {
-          setModalId(Object.values(res));
-          setModalOpen(true);
-        }
-        setSoftLoading(false);
-      })
-      .catch(err => {
-        console.log(err.message);
-        setSoftLoading(false);
-      });
-    }
+  useEffect(() => {
+    async function contractCalls() {
+      if (contract) {
+        contract.methods.verifyProduct(
+          productId
+        ).call({from: acct})
+        .then(res => {
+          console.log(res);
+          if (res[1] == 0) {
+            alert("Please enter valid product id");
+          } else {
+            setModalId(Object.values(res));
+            setModalOpen(true);
+          }
+          setSoftLoading(false);
+        })
+        .catch(err => {
+          console.log(err.message);
+          setSoftLoading(false);
+        });
+      }
+    };
+    contractCalls();
   }, [contract])
 
 

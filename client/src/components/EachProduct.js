@@ -1,7 +1,5 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import { GlobalContext } from '../context/provider';
-import ProductDetails from './ProductDetails';
-import TransferModal from './TransferModal';
 import Web3 from 'web3';
 
 function EachProduct({prodId, prodName, con}) {
