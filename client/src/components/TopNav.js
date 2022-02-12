@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react';
-import getWeb3 from '../getWeb3';
 import Web3 from "web3";
 import '../styles/AllNav.css';
 import { GlobalContext } from '../context/provider';

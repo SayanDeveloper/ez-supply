@@ -7,8 +7,6 @@ import '../styles/main.css';
 import { GlobalContext } from '../context/provider';
 import Web3 from "web3";
 import supplyChain from '../contracts/supplyChain.json';
-// testing contract
-import TestBlock from '../contracts/TestBlock.json';
 
 function AddProduct() {
   // states
@@ -27,21 +25,24 @@ function AddProduct() {
   const [acct, setAcct] = web3Ac;
 
   // functions
-  useEffect(async () => {
+  useEffect(() => {
     const d = new Date();
     setDate(d.toISOString().substr(0, 10));
-    if (window.ethereum) {
-      try {
-        let acc = await window.ethereum.send("eth_requestAccounts");
-        let web3 = new Web3(window.ethereum);
-        setWeb3(web3);
-        setLoading(false);
-      } catch(err) 
-      {
-        console.log(err.message);
+    async function metamaskConnection() {
+      if (window.ethereum) {
+        try {
+          let acc = await window.ethereum.send("eth_requestAccounts");
+          let web3 = new Web3(window.ethereum);
+          setWeb3(web3);
+          setLoading(false);
+        } catch(err) 
+        {
+          console.log(err.message);
+        }
       }
+      setSoftLoading(false);
     }
-    setSoftLoading(false);
+    metamaskConnection();
   }, []);
 
   useEffect(() => {
@@ -83,10 +84,6 @@ function AddProduct() {
     setContract(instance);
     console.log(instance);
   }
-
-  // useEffect(() => {
-  //   console.log(date);
-  // }, [date]);
 
   if (sessionStorage.getItem('token') == null) {
     window.location.href = "/login";

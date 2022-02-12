@@ -7,8 +7,6 @@ import TransferModal from './TransferModal';
 import { GlobalContext } from '../context/provider';
 import Web3 from "web3";
 import supplyChain from '../contracts/supplyChain.json';
-// testing contract
-import TestBlock from '../contracts/TestBlock.json';
 
 function TransferOwnership() {
   // states
