@@ -52,10 +52,16 @@ function Register() {
         const res = await contract.methods.addManufacturerCheck().call({from: acct[0]});
         console.log(res);
         if (res) {
-          const a = await contract.methods.addManufacturer().send({from: acct[0]});
-          setSolVerified(true);
-          setLoading(false);
-          // window.location.href = "/login";
+          contract.methods.addManufacturer().send({from: acct[0]})
+          .then(r => {
+            setSolVerified(true);
+            setLoading(false);
+            setSoftLoading(false);
+          })
+          .catch(err => {
+            console.log(err);
+            setSoftLoading(false);
+          })
         } else {
           alert("The wallet id is linked with another manufacturer account");
           setSoftLoading(false);

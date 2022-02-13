@@ -56,7 +56,6 @@ function AddProduct() {
         parseInt(quantity)
       ).send({from: acct})
       .then(res => {
-        console.log(res);
         setToastAppear(true);
         setSoftLoading(false);
         setProdName("");

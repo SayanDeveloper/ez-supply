@@ -16,7 +16,6 @@ function Login() {
 
     // context
     const {solid, soft} = useContext(GlobalContext);
-    const [loading, setLoading] = solid;
     const [softLoading, setSoftLoading] = soft;
 
     // functions
