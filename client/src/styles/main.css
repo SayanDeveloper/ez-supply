@@ -349,5 +349,43 @@ a {
         opacity: 1;
     }
 }
+.add-prod-inputs.login-form label {
+    z-index: 1 !important;
+}
 
 /* responsiveness */
+
+@media screen and (min-width: 1570px) {
+    .owned-products-list .each-prod {
+        width: 900px;
+    }
+    .main-content-container {
+        width: calc(100vw - 400px);
+        margin-left: 400px;
+        padding-top: 100px;
+    }
+    .main-content-container h2 {
+        font-size: 36px;
+    }
+}
+@media (max-width: 1180px) {
+    .owned-products-list .each-prod {
+        width: 600px;
+        height: 80px;
+    }
+}
+@media (max-width: 960px) {
+    .main-content-container {
+        width: 100%;
+        margin-left: 0px;
+    }
+}
+@media screen and (max-width: 710px) {
+    .owned-products-list {
+        width: calc(100% - 50px);
+        margin: auto;
+    }
+    .owned-products-list .each-prod {
+        width: calc(100% - 40px);
+    }
+}

@@ -5,8 +5,9 @@ import { GlobalContext } from '../context/provider';
 
 function TopNav() {
   // context
-  const {web3Ac} = useContext(GlobalContext);
+  const {web3Ac, sideNav} = useContext(GlobalContext);
   const [acct, setAcct] = web3Ac;
+  const [sideNavOpen, setSideNavOpen] = sideNav;
 
   // useEffect functions
   useEffect(() => {
@@ -30,6 +31,9 @@ function TopNav() {
   
   return (
     <div className='topnav-container'>
+      <div className='hamburger-container' onClick={() => setSideNavOpen(!sideNavOpen)}>
+        <i className="fa fa-bars" aria-hidden="true"></i>
+      </div>
       <h1 className='logo'>EZ Supply</h1>
       <div className='wallet-details text-center'>
         Wallet Address:<br />

@@ -12,6 +12,7 @@ export const GlobalProvider = ({children}) => {
     const [toastAppear, setToastAppear] = useState(false);
     const [transferMod, setTransferMod] = useState(false);
     const [modalId, setModalId] = useState({});
+    const [sideNavOpen, setSideNavOpen] = useState(false);
     // web3 stuffs
     const [acct, setAcct] = useState(null);
 
@@ -25,7 +26,8 @@ export const GlobalProvider = ({children}) => {
             transfer: [transferMod, setTransferMod],
             modalID: [modalId, setModalId],
             web3Ac: [acct, setAcct],
-            UserData: [userData, setUserData]
+            UserData: [userData, setUserData],
+            sideNav: [sideNavOpen, setSideNavOpen]
         }}>
             {children}
         </GlobalContext.Provider>
