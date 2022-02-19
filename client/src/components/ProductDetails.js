@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import { GlobalContext } from '../context/provider';
+import QRCode from 'react-qr-code';
 
 function ProductDetails() {
     // states
@@ -52,7 +53,7 @@ function ProductDetails() {
                     }
                     </div>
                 <div className='qr-code'>
-                    <img src='./images/sample-qr.png' alt='qr-code' />
+                    <QRCode value={modalId[1]} />
                 </div>
             </div>
         </div>

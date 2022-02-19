@@ -103,6 +103,9 @@ a {
     justify-content: center;
     margin-top: 20px;
 }
+.qr-code svg {
+    transform: scale(0.9);
+}
 .prod-modal-det-container .det-title {
     color: rgb(0, 23, 100);
     font-weight: 600;
