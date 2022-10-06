@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
