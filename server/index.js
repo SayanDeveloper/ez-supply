@@ -5,11 +5,12 @@ const mongoose = require("mongoose");
 const User = require("./models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
 
-const DB = "mongodb+srv://web3project:ezsupply@ez-supply.dwlrg.mongodb.net/test-signup?retryWrites=true&w=majority";
+const DB = process.env.MONGO_URL;
 mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true 
