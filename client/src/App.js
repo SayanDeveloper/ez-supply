@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     async function fetchDesig() {
       if (sessionStorage.getItem("token")) {
-        const req = await fetch("https://ezsupply-backend.herokuapp.com/api/info", {
+        const req = await fetch("https://api.ezsupply.sayan.rocks/api/info", {
           headers: {
             'x-access-token': sessionStorage.getItem("token"),
           }

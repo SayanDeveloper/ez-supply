@@ -40,7 +40,7 @@ function Login() {
     async function loginUser(e) {
         e.preventDefault();
         setSoftLoading(true);
-        const response = await fetch("https://ezsupply-backend.herokuapp.com/api/login", {
+        const response = await fetch("https://api.ezsupply.sayan.rocks/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

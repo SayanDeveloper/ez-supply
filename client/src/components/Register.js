@@ -76,7 +76,7 @@ function Register() {
     async function signup() {
       if (solVerified) {
         // mongodb signup
-        const response = await fetch("https://ezsupply-backend.herokuapp.com/api/register", {
+        const response = await fetch("https://api.ezsupply.sayan.rocks/api/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
